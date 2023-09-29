@@ -1,0 +1,15 @@
+/* Stile predefinito dell'header */
+app-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Aggiungi altri stili all'header se necessario */
+  /* Colore del font predefinito */
+}
+
+/* Stile per il colore del font quando sei sulla pagina "Reviews" */
+.reviews-page app-header {
+  color: black; /* Cambia il colore del font come desideri per la pagina "Reviews" */
+}
+

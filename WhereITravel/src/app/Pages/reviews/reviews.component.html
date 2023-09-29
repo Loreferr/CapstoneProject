@@ -1,0 +1,187 @@
+<div class="hero">
+  <div class="heroverlay">
+    <app-header></app-header>
+    <div class="findtool">
+      <form (ngSubmit)="getReviewsByCity()" #cityForm="ngForm">
+        <div class="mb-3">
+          <label for="exampleInputCity" class="form-label"
+            >Cerca Recensione</label
+          >
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Cittá</span>
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="city"
+              name="city"
+              class="form-control"
+              aria-label="cityHelp"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary ms-2"
+                (click)="scrollToCards()"
+                type="submit"
+              >
+                Cerca
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="btngroup text-center">
+        <button
+          (click)="loadAllReviews()"
+          class="btn btn-outline-dark text text-center me-3"
+        >
+          Tutte
+        </button>
+        <button (click)="filterReviewsByAuthor()" class="btn btn-outline-dark">
+          Create da Me
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="background-overlay">
+  <div class="container-fluid px-5">
+    <h3 id="card" class="text-center mb-3">Recensioni</h3>
+    <div class="row justify-content-center align-items-start">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div *ngFor="let review of reviews" class="card mb-4 rounded-5">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.city }}</h5>
+            <i
+              class="fa-solid fa-quote-left"
+              style="color: #ffbb00; font-size: 3.5em"
+            ></i>
+            <p
+              class="card-text"
+              [ngClass]="{
+                'expanded-description': expandedDescriptions[review.id]
+              }"
+            >
+              {{
+                expandedDescriptions[review.id]
+                  ? review.description
+                  : (review.description | slice : 0 : maxDescriptionLength)
+              }}
+              <span *ngIf="review.description.length > maxDescriptionLength">
+                <a href="#" (click)="toggleDescription($event, review)">
+                  {{
+                    expandedDescriptions[review.id]
+                      ? "Mostra meno"
+                      : "Leggi di più"
+                  }}
+                </a>
+              </span>
+            </p>
+            <i
+              class="fa-solid fa-quote-right"
+              style="color: #ffbb00; font-size: 3.5em"
+            ></i>
+            <p style="font-size: 1.5em">
+              Rating:
+              <span
+                style="color: #ffbb00; font-size: 1.5em"
+                [innerHTML]="review.rating | starRating"
+              ></span>
+            </p>
+            <div class="row justify-content-between align-items-center">
+              <p class="author">@{{ review.author || currentUsername }}</p>
+              <div *ngIf="showDeleteButton">
+                <button
+                  (click)="deleteReview(review.id)"
+                  class="btn btn-danger"
+                >
+                  Delete
+                </button>
+                <button
+                  class="btn btn-outline-primary ms-3"
+                  type="button"
+                  (click)="openVerticallyCentered(Review, review.id)"
+                >
+                  Modifica
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #Review let-modal>
+  <div class="modal-content shadow">
+    <div class="modal-body p-5 pt-0">
+      <form>
+        <img
+          class="mb-4"
+          src="https://cdn.icon-icons.com/icons2/2389/PNG/512/spacex_logo_icon_144865.png"
+          alt=""
+          width="80"
+          height="80"
+        />
+
+        <div class="form-floating my-2">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            name="citta"
+            [(ngModel)]="UpdatedReviewData.city"
+          />
+          <label for="floatingInput">Citta</label>
+        </div>
+        <div class="form-floating my-2">
+          <input
+            type="text"
+            class="form-control descriptionfield"
+            id="floatingPassword"
+            placeholder="Descrizione"
+            name="descrizione"
+            [(ngModel)]="UpdatedReviewData.description"
+          />
+          <label for="floatingPassword">Descrizione</label>
+        </div>
+        <div class="form-floating my-2">
+          <input
+            type="number"
+            class="form-control"
+            id="floatingInput"
+            placeholder="username@example.com"
+            name="rating"
+            min="1"
+            max="5"
+            required=""
+            [(ngModel)]="UpdatedReviewData.rating"
+          />
+          <label for="floatingInput">Rating</label>
+        </div>
+
+        <button
+          (click)="updateReview(selectedReviewId, UpdatedReviewData)"
+          type="button"
+          class="btn btn-outline-dark"
+        >
+          Modifica
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<div
+  *ngIf="showScrollToTopButton"
+  class="scroll-to-top"
+  (click)="scrollToTop()"
+>
+  Torna su
+</div>
+
+<app-footer></app-footer>

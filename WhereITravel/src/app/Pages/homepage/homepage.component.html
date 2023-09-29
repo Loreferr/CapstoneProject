@@ -1,0 +1,86 @@
+<div
+  *ngFor="let imageUrl of backgroundImages"
+  class="background"
+  [style.backgroundImage]="'url(' + imageUrl + ')'"
+>
+  <!-- Il resto del tuo contenuto -->
+  <div class="background-overlay">
+    <app-header class="homepage-header"></app-header>
+    <div class="container">
+      <div
+        class="row hero align-items-center justify-content-center text-center"
+      >
+        <h1 class="text-light">Discover Your Next Journey</h1>
+        <p class="text-light text-center">
+          let us suggest your next destination based on your personality.
+          <br />
+          Review your best trips
+        </p>
+        <button [routerLink]="" (click)="scrollToForm()">Get Started</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-container container-fluid rounded-5" id="form">
+  <app-form></app-form>
+
+  <div class="container-fluid reviews">
+    <div class="row mt-5 mb-3">
+      <h3>Latest Reviews</h3>
+    </div>
+    <div class="row justify-content-center align-items-center">
+      <div *ngFor="let review of reviews" class="col-4">
+        <div
+          class="card mb-4 rounded-5"
+          [class.expanded]="expandedDescriptions[review.id]"
+        >
+          <div class="card-body">
+            <h5 class="card-title">{{ review.city }}</h5>
+            <i
+              class="fa-solid fa-quote-left"
+              style="color: #ffbb00; font-size: 3.5em"
+            ></i>
+            <p
+              class="card-text"
+              [ngClass]="{
+                'expanded-description': expandedDescriptions[review.id]
+              }"
+            >
+              {{
+                expandedDescriptions[review.id]
+                  ? review.description
+                  : (review.description | slice : 0 : maxDescriptionLength)
+              }}
+              <span *ngIf="review.description.length > maxDescriptionLength">
+                <a href="#" (click)="toggleDescription($event, review)">
+                  {{
+                    expandedDescriptions[review.id]
+                      ? "Mostra meno"
+                      : "Leggi di più"
+                  }}
+                </a>
+              </span>
+            </p>
+            <i
+              class="fa-solid fa-quote-right"
+              style="color: #ffbb00; font-size: 3.5em"
+            ></i>
+            <p></p>
+            <p style="font-size: 1.5em">
+              Rating:
+              <span
+                style="color: #ffbb00; font-size: 1.5em"
+                [innerHTML]="review.rating | starRating"
+              ></span>
+            </p>
+
+            <p class="author">@{{ review.author || currentUsername }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,222 @@
+
+
+header {
+
+  overflow-x: hidden;
+
+  transition: background-color 0.3s ease;
+}
+
+ul{
+  align-items: center;
+  width: 600px;
+  height: 60px;
+  list-style: none;
+  gap: 2em;
+  font-size: 1.2em;
+  margin-right: 215px;
+
+}
+*{
+  font-family: 'montserrat';
+
+}
+
+
+a{
+  font-size: 1em;
+color: snow;
+
+
+}
+
+.underline:hover{
+color: snow;
+  opacity: 100%;
+
+}
+
+button{
+  font-size: 1.2em;
+
+  border-radius: 30px;
+  height: 50px;
+
+  border: 0;
+  background-color: transparent;
+
+  transition: 300ms;
+}
+
+
+
+form{
+
+
+
+
+  h1{
+    font-weight: bold;
+    text-align: center;
+    font-size: 4em;
+  }
+  button{
+    height: 40px;
+    border-radius: 30px;
+  }
+  input{
+    border-radius: 20px;
+  }
+  a{
+    text-decoration: none;
+  }
+
+
+
+
+}
+
+
+.nav-link{
+  position: relative;
+}
+.underline:after{
+
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: snow;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+
+}
+
+
+
+.account{
+  font-size: 1.2em;
+  color: snow;
+  text-decoration: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+
+.nav-link:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+.crea{
+  text-align: center;
+color: black;
+height: 50px;
+font-weight: 600;
+width: 250px;
+background-color:white;
+border-radius: 30px;
+cursor: pointer;
+transition: 0.2s linear;
+}
+
+.crea:hover{
+  scale: 1.1;
+}
+
+.user{
+  font-size: 1.5em;
+  opacity: 70%;
+}
+
+.user:hover{
+
+  opacity: 100%;
+}
+/* Imposta uno stile diverso quando l'header è "fuori vista" */
+
+
+.authbtn{
+  width: 120px;
+}
+
+.usergroup{
+  width: 350px;
+}
+
+
+.authbtn:hover{
+  background-color:snow;
+  color: black;
+  opacity: 100%;
+  box-shadow:0px 0px 8px 5px  rgba(105, 104, 104, 0.4) ;
+}
+
+/* Nel tuo file CSS */
+.descriptionfield{
+ height: 200px;
+ text-align: left;
+ overflow: hidden; /* Nasconde il testo che supera il bordo del campo */
+    white-space: pre-wrap;
+}
+
+.fixed{
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  transition: 0.5s linear;
+  .underline:after{
+    background-color: black;
+  }
+  ul{
+    background-color:rgba(255, 255, 255, 0.74);
+    border-radius: 50px;
+    box-shadow:0px 0px 8px 5px rgba(105, 104, 104, 0.4) ;
+    .crea{
+      border: 1px solid rgb(151, 148, 148);
+
+    }
+  }
+
+  .usergroup{
+    box-shadow:0px 0px 8px 5px  rgba(105, 104, 104, 0.4) ;
+    border-radius: 50px;
+    background-color:white;
+    button{
+      color: black !important;
+      font-weight: 600;
+    }
+
+  }
+  .underline{
+    color: black;
+    font-weight: 600;
+  }
+
+
+}
+
+.nofixed{
+  position: static;
+  top: -50px;
+  transition: 0.2s linear;
+}
+
+
+.logout{
+  width: 100px;
+  background-color: firebrick;
+}
+.logout:hover{
+scale: 1.2;
+}
+
+
+.dropdown{
+  position: relative;
+}

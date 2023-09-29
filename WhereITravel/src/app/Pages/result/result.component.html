@@ -1,0 +1,114 @@
+<!-- result.component.html -->
+<div class="page">
+  <app-header></app-header>
+  <div class="result-container">
+    <div class="row">
+      <!-- Colonna per lo slider -->
+      <div class="col-md-6">
+        <ngb-carousel
+          #carousel
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <!-- Slides dello slider -->
+          <ng-template ngbSlide *ngFor="let img of images; index as i">
+            <div class="carousel-caption"></div>
+            <a
+              href="https://www.google.fr/?q=Number+{{ i + 1 }}"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+            >
+              <div class="picsum-img-wrapper">
+                <img
+                  class="image-slider"
+                  [src]="img"
+                  alt="My image {{ i + 1 }} description"
+                />
+              </div>
+            </a>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+
+      <!-- Colonna per il testo -->
+      <div class="col-md-6 px-5 slide2">
+        <!-- Visualizza la destinazione selezionata -->
+        <h1 class="text-center mb-4">
+          La tua destinazione ideale è: <br />
+          <strong class="mt-2">{{ destination }}</strong>
+        </h1>
+
+        <p class="description">{{ description }}</p>
+
+        <!-- Mostra i luoghi di interesse per la personalità selezionata -->
+        <h3>Luoghi di Interesse:</h3>
+        <div class="row justify-content-center align-items-center">
+          <ng-container *ngFor="let interest of interests">
+            <div class="col-3 mt-3 fs-5">
+              <p class="mb-3">{{ interest }}</p>
+              <img
+                class="img-fluid interest-image"
+                [src]="interestImages[interest]"
+                alt="{{ interest }} Image"
+                (click)="openImageInDetail(interestImages[interest])"
+              />
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row reviews justify-content-center align-items-center mt-5">
+    <div *ngFor="let review of reviews" class="col-4">
+      <div
+        class="card mb-4 rounded-5"
+        [class.expanded]="expandedDescriptions[review.id]"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ review.city }}</h5>
+          <i
+            class="fa-solid fa-quote-left"
+            style="color: #ffbb00; font-size: 3.5em"
+          ></i>
+          <p
+            class="card-text"
+            [ngClass]="{
+              'expanded-description': expandedDescriptions[review.id]
+            }"
+          >
+            {{
+              expandedDescriptions[review.id]
+                ? review.description
+                : (review.description | slice : 0 : maxDescriptionLength)
+            }}
+            <span *ngIf="review.description.length > maxDescriptionLength">
+              <a href="#" (click)="toggleDescription($event, review)">
+                {{
+                  expandedDescriptions[review.id]
+                    ? "Mostra meno"
+                    : "Leggi di più"
+                }}
+              </a>
+            </span>
+          </p>
+          <i
+            class="fa-solid fa-quote-right"
+            style="color: #ffbb00; font-size: 3.5em"
+          ></i>
+          <p style="font-size: 1.5em">
+            Rating:
+            <span
+              style="color: #ffbb00; font-size: 1.5em"
+              [innerHTML]="review.rating | starRating"
+            ></span>
+          </p>
+          <p class="author">@{{ review.author || currentUsername }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Aggiungi uno stile CSS per personalizzare la pagina -->

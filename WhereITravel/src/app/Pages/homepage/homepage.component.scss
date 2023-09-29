@@ -1,0 +1,144 @@
+.background{
+
+  overflow-x: hidden;
+  height: 100vh;
+
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  position: relative;
+
+}
+
+
+
+
+
+
+  .background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Imposta l'opacità desiderata */
+  }
+
+
+
+
+.hero{
+  margin-top: 300px;
+
+
+
+h1{
+  font-size: 6em;
+  font-weight: 700;
+}
+p{
+  opacity: 70%;
+  font-size: 2em;
+}
+
+button{
+  color: black;
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 30px;
+  height: 50px;
+  width: 200px;
+  border: 0;
+  background-color: white;
+  box-shadow:0px 0px 12px 5px rgba(214, 210, 210, 0.3) ;
+  transition: 300ms;
+
+}
+button:hover{
+  scale:(1.1);
+}
+
+
+
+}
+
+.form-container {
+  margin-top: 50px;
+  height: 1000px;
+  padding: 0;
+
+}
+
+.bg1{
+
+  background-position: center;
+  background-size: cover;
+
+
+}
+
+.p-bg{
+  background-color: rgba(243, 237, 237, 0.212);
+
+
+}
+
+
+
+.reviews{
+  padding: 0 40px;
+
+
+}
+
+.fa-quote-right{
+  position: relative;
+  left: 720px;
+}
+h5{
+  font-size: 2em;
+}
+
+.author{
+  font-size: 1.5em;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.card-text{
+  font-size: 1.2em;
+}
+
+#form{
+  margin-bottom: 550px;
+}
+
+
+.expanded-description {
+  overflow: visible;
+}
+
+
+.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Imposta un valore alto per sovrapporre il contenuto esistente */
+  background-color: white; /* Aggiungi uno sfondo bianco o un altro sfondo desiderato */
+  padding: 20px; /* Aggiungi spaziatura interna se necessario */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Aggiungi ombra se necessario */
+}
+
+span{
+  a{
+    padding: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.432);
+    border-radius: 30px;
+  }
+}
+
+
