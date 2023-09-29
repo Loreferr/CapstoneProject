@@ -28,7 +28,7 @@ errorMessage: string = '';
 
 
 username: string = '';
-  constructor(private modalService: NgbModal, private authService: AuthService,private router: Router,private reviewService: ReviewService){
+  constructor(private modalService: NgbModal, private authService: AuthService,private router: Router,private reviewService: ReviewService) {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername !== null) {
       this.username = storedUsername;
@@ -57,8 +57,18 @@ username: string = '';
     const storedAuthToken = localStorage.getItem('authToken');
     if (storedAuthToken !== null) {
       this.authService.setIsLoggedIn(true); // Imposta l'utente come "loggato"
+
     }
-  }
+    /*let header = document.getElementById('site-header');
+if (this.router.url.startsWith('/results')) {
+
+      header!.style.backgroundColor = "purple"
+    } else {
+      header!.style.backgroundColor = "none"
+
+
+
+  }*/ }
 
 
   open(modal: any) {
