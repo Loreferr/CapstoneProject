@@ -1,33 +1,3 @@
-<!--<div class="container bg-white rounded-5 py-5 mt-3 form-ground text-center">
-  <h2 class="mb-4 text-center">Find Your Perfect Place</h2>
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <form (ngSubmit)="onFormSubmit()">
-        <ng-container *ngFor="let question of questions; let i = index">
-          <div *ngIf="currentQuestionIndex === i">
-             Domanda corrente
-            <label class="form-label mb-3 fs-5"
-              >{{ i + 1 }}. {{ question.text }}</label
-            >
-            <div class="btn-group" role="group">
-               Utilizza un loop per generare i pulsanti per le opzioni -->
-<!-- Nel template HTML
-              <button
-                type="button"
-                class="btn btn-outline-dark rounded-5 me-3"
-                *ngFor="let option of question.options; let j = index"
-                (click)="selectAnswer(i, j)"
-              >
-                {{ option }}
-              </button>
-            </div>
-          </div>
-        </ng-container>
-      </form>
-    </div>
-  </div>
-</div> -->
-
 <div class="container bg-white rounded-5 py-5 mt-3 form-ground text-center">
   <h2 class="mb-4 text-center">Find Your Perfect Place</h2>
   <div class="row justify-content-center">
@@ -55,9 +25,3 @@
     </div>
   </div>
 </div>
-
-<!-- Visualizza i contatori -->
-
-<!--<div *ngIf="destination">
-  La meta turistica consigliata per te è: {{ destination }}
-</div>-->

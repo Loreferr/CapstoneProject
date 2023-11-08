@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef } from '@angular/core';
-import { ImageData } from '../../Interfaces/image-data'; // Use correct relative path
+import { ImageData } from '../../Interfaces/image-data';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewService } from 'src/app/reviews.service';
 import { faStar,  } from '@fortawesome/free-solid-svg-icons';
@@ -21,8 +21,8 @@ export class HomepageComponent {
 
   faStar = faStar;
 
-  // HeaderComponent
-maxDescriptionLength: number = 280; // Puoi impostare il limite a tuo piacimento
+
+maxDescriptionLength: number = 280;
 currentUsername: string | null = null;
   backgroundImages: string[] = [];
   reviews: any[] = [];
@@ -40,7 +40,7 @@ currentUsername: string | null = null;
 
 
     this.reviewService.reviewUpdated$.subscribe(() => {
-      // Quando ricevi una notifica di aggiornamento, ricarica le cards
+
       this.reviewService.getReviews().subscribe((data) => {
         this.reviews = data.reverse().slice(0,6);
       });
@@ -57,15 +57,15 @@ currentUsername: string | null = null;
 
       for (const review of this.reviews) {
         review.displayedDescription = review.description.slice(0, this.maxDescriptionLength);
-        review.showFull = false; // Inizialmente nascondi la descrizione completa
+        review.showFull = false;
       }
     });
 
 
 
-    this.http.get<ImageData[]>(apiUrl) // Usiamo il tipo ImageData[]
-      .subscribe((data: ImageData[]) => { // Tipo corretto per i dati
-        // Estrai gli URL delle immagini e assegnali a backgroundImages
+    this.http.get<ImageData[]>(apiUrl)
+      .subscribe((data: ImageData[]) => {
+
         this.backgroundImages = data.map(image => image.urls.regular);
       });
 
@@ -81,7 +81,7 @@ currentUsername: string | null = null;
 
 
 toggleDescription(event: Event, review: any): void {
-  event.preventDefault(); // Prevent the default link behavior (page reload)
+  event.preventDefault();
   this.expandedDescriptions[review.id] = !this.expandedDescriptions[review.id];
 }
 
@@ -92,19 +92,18 @@ getStars(rating: number): any[] {
   const stars: any[] = [];
   for (let i = 0; i < 5; i++) {
     if (i < rating) {
-      stars.push(faStar); // Icona stella piena
+      stars.push(faStar);
     } else {
-      stars.push(faStar); // Icona stella vuota
+      stars.push(faStar);
     }
   }
   return stars;
 }
 
-// HeaderComponent
-showFullDescription(review: any): void {
-  review.showFull = !review.showFull; // Usa una proprietà 'showFull' per tener traccia dello stato
 
-  // Se la descrizione è estesa, mostra solo la parte limitata al clic su "Leggi di più"
+showFullDescription(review: any): void {
+  review.showFull = !review.showFull;
+
   if (review.showFull) {
     review.displayedDescription = review.description;
   } else {
@@ -113,7 +112,7 @@ showFullDescription(review: any): void {
 }
 
 scrollToForm() {
-  // Esegui lo scorrimento animato verso l'elemento del form utilizzando JavaScript puro
+
   const formElement = this.el.nativeElement.querySelector('#form');
   if (formElement) {
     formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });

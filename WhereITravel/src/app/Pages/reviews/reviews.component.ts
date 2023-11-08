@@ -20,7 +20,7 @@ export class ReviewsComponent {
   faStar = faStar;
   showDeleteButton: boolean = false;
   city: string = '';
-  selectedReviewId: number = 0 // Inizializzata a null inizialmente
+  selectedReviewId: number = 0
   expandedDescriptions: { [key: number]: boolean } = {};
   author: any = '';
   showScrollToTopButton = false;
@@ -30,7 +30,7 @@ export class ReviewsComponent {
   UpdatedReviewData: any = {
     city: '', // string
     description: '', // string
-    rating: 0, // numero (puoi inizializzarlo a 0, ad esempio)
+    rating: 0,
   };
 
 
@@ -38,7 +38,7 @@ export class ReviewsComponent {
 
 
     this.reviewService.reviewUpdated$.subscribe(() => {
-      // Quando ricevi una notifica di aggiornamento, ricarica le cards
+
       this.reviewService.getReviews().subscribe((data) => {
         this.reviews = data.reverse();
       });
@@ -55,11 +55,11 @@ export class ReviewsComponent {
 
       for (const review of this.reviews) {
         review.displayedDescription = review.description.slice(0, this.maxDescriptionLength);
-        review.showFull = false; // Inizialmente nascondi la descrizione completa
+        review.showFull = false;
       }
 
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) { // Puoi regolare questa soglia in base alle tue esigenze
+        if (window.scrollY > 300) {
           this.showScrollToTopButton = true;
         } else {
           this.showScrollToTopButton = false;
@@ -82,7 +82,7 @@ export class ReviewsComponent {
 scrollToTop() {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth' // Aggiunge uno scorrimento fluido
+    behavior: 'smooth'
   });
 }
 
@@ -90,7 +90,7 @@ scrollToTop() {
 getReviewsByCity() {
   this.reviewService.getReviewsByCity(this.city).subscribe(
     (data) => {
-      // Aggiorna la variabile reviews con le recensioni filtrate
+
       this.reviews = data;
     },
     (error) => {
@@ -102,7 +102,7 @@ getReviewsByCity() {
 getReviewsByAuthor() {
   this.reviewService.getReviewsByAuthor(this.author).subscribe(
     (data) => {
-      // Aggiorna la variabile reviews con le recensioni filtrate
+
       this.reviews = data;
     },
     (error) => {
@@ -112,7 +112,7 @@ getReviewsByAuthor() {
 }
 
 scrollToCards() {
-  // Esegui lo scorrimento animato verso l'elemento del form utilizzando JavaScript puro
+
   const cardElement = this.el.nativeElement.querySelector('#card');
   if (cardElement) {
     cardElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -120,22 +120,21 @@ scrollToCards() {
 }
 
 toggleDescription(event: Event, review: any): void {
-  event.preventDefault(); // Prevent the default link behavior (page reload)
+  event.preventDefault();
   this.expandedDescriptions[review.id] = !this.expandedDescriptions[review.id];
 }
 
 filterReviewsByAuthor() {
-  // Recupera l'autore dalle informazioni memorizzate nel localStorage
+
   const author = localStorage.getItem('username');
   console.log(author);
    // Assicurati che la chiave sia corretta
 
   if (author) {
-    // Se è stato trovato un autore nel localStorage
-    // Chiamiamo il servizio di recensioni per ottenere solo le recensioni di quell'autore
+
     this.reviewService.getReviewsByAuthor(author).subscribe(
       (reviews) => {
-        // Gestisci le recensioni filtrate qui, ad esempio, aggiorna la tua variabile di reviews
+
         this.reviews = reviews.reverse()
         this.reviews = reviews;
         this.showDeleteButton = reviews.length > 0;
@@ -149,13 +148,13 @@ filterReviewsByAuthor() {
 }
 
 deleteReview(reviewId: number) {
-  const authToken = localStorage.getItem('authToken'); // Assicurati di avere il token corretto
+  const authToken = localStorage.getItem('authToken');
 
   if (authToken) {
-    // Invia una richiesta per eliminare la recensione utilizzando l'ID e il token di autenticazione
+
     this.reviewService.deleteReview(reviewId, authToken).subscribe(
       () => {
-        // La recensione è stata eliminata con successo, ora recupera le recensioni dell'autore
+
 
       },
       (error) => {
@@ -171,10 +170,10 @@ updateReview(selectedReviewId: number, updatedData: any) {
   const authToken = localStorage.getItem('authToken'); // Ottieni il token
 
   if (authToken) {
-    // Invia una richiesta HTTP PUT al server con i dati aggiornati
+
     this.reviewService.updateReview(selectedReviewId, updatedData, authToken).subscribe(
       (response) => {
-        // Gestisci la risposta dal server o aggiorna la vista come necessario
+
         console.log('Recensione aggiornata con successo:', response);
         this.filterReviewsByAuthor();
         this.closeModal('Review')
@@ -188,7 +187,7 @@ updateReview(selectedReviewId: number, updatedData: any) {
 
 
 closeModal(modalName: string) {
-  // Chiudi la modale utilizzando il nome della modale
+
   this.modalService.dismissAll(modalName);
 
 }
@@ -209,7 +208,7 @@ loadAllReviews() {
 
 
 openVerticallyCentered(content: any, reviewId: number) {
-  this.selectedReviewId = reviewId; // Imposta l'ID della recensione selezionata
+  this.selectedReviewId = reviewId;
   this.modalService.open(content, { centered: true });
 
   document.body.classList.add('no-scroll');
@@ -222,9 +221,9 @@ getStars(rating: number): any[] {
   const stars: any[] = [];
   for (let i = 0; i < 5; i++) {
     if (i < rating) {
-      stars.push(faStar); // Icona stella piena
+      stars.push(faStar);
     } else {
-      stars.push(faStar); // Icona stella vuota
+      stars.push(faStar);
     }
   }
   return stars;

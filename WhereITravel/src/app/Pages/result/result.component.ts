@@ -38,7 +38,7 @@ ngOnInit() {
     this.description = params['description'];
     this.interests = params['interests']
     if (this.destination) {
-      // Esegui la richiesta HTTP per ottenere le immagini basate sulla destinazione
+
       this.getImagesFromUnsplash(this.destination);
     }
     if (this.interests && this.interests.length > 0) {
@@ -48,10 +48,10 @@ ngOnInit() {
   });
 
   this.reviewService.getReviews().subscribe((data: { city: string }[]) => {
-    // Trasforma la destinazione e le città delle recensioni in minuscolo per uniformità
+
     const destinationLower = this.destination.toLowerCase();
 
-    // Filtra le recensioni in base alla città di destinazione (confronto flessibile)
+
     this.reviews = data.filter((review) => destinationLower.includes(review.city.toLowerCase()));
   });
 
@@ -61,7 +61,7 @@ ngOnInit() {
 }
 
 toggleDescription(event: Event, review: any): void {
-  event.preventDefault(); // Prevent the default link behavior (page reload)
+  event.preventDefault();
   this.expandedDescriptions[review.id] = !this.expandedDescriptions[review.id];
 }
 
@@ -70,14 +70,14 @@ getStars(rating: number): any[] {
   const stars: any[] = [];
   for (let i = 0; i < 5; i++) {
     if (i < rating) {
-      stars.push(faStar); // Icona stella piena
+      stars.push(faStar);
     } else {
-      stars.push(faStar); // Icona stella vuota
+      stars.push(faStar);
     }
   }
   return stars;
 }
-/*images = [62, 83, 466, 965, 982, 1043, 738].map((n) => `https://picsum.photos/id/${n}/2000/800`);*/
+
 paused = false;
 	unpauseOnArrow = false;
 	pauseOnIndicator = false;

@@ -1,9 +1,7 @@
-<!-- result.component.html -->
 <div class="page">
   <app-header></app-header>
   <div class="result-container">
     <div class="row">
-      <!-- Colonna per lo slider -->
       <div class="col-md-6">
         <ngb-carousel
           #carousel
@@ -12,7 +10,6 @@
           [pauseOnFocus]="pauseOnFocus"
           (slide)="onSlide($event)"
         >
-          <!-- Slides dello slider -->
           <ng-template ngbSlide *ngFor="let img of images; index as i">
             <div class="carousel-caption"></div>
             <a
@@ -34,7 +31,6 @@
 
       <!-- Colonna per il testo -->
       <div class="col-md-6 px-5 slide2">
-        <!-- Visualizza la destinazione selezionata -->
         <h1 class="text-center mb-4">
           La tua destinazione ideale è: <br />
           <strong class="mt-2">{{ destination }}</strong>
@@ -42,7 +38,6 @@
 
         <p class="description">{{ description }}</p>
 
-        <!-- Mostra i luoghi di interesse per la personalità selezionata -->
         <h3>Luoghi di Interesse:</h3>
         <div class="row justify-content-center align-items-center">
           <ng-container *ngFor="let interest of interests">
@@ -110,5 +105,3 @@
     </div>
   </div>
 </div>
-
-<!-- Aggiungi uno stile CSS per personalizzare la pagina -->

@@ -23,15 +23,11 @@
   </ul>
 
   <div class="col-md-3 auth py-2 usergroup me-3">
-    <!-- Bottone con il nome dell'utente quando è loggato -->
     <div class="" *ngIf="isLoggedIn">
       <button class="account">Benvenuto {{ username }}</button>
       <button class="account logout" (click)="fakeLogout()">Logout</button>
-
-      <!-- Bottone Logout -->
     </div>
 
-    <!-- Pulsanti di login e registrazione quando l'utente non è loggato -->
     <button
       type="button"
       *ngIf="!isLoggedIn"
